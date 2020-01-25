@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: unbound
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: unbound
+    spec:
+      containers:
+      - name: unbound
+        image: hrodenburg/unbound:1.9.6-1
+        ports:
+        - containerPort: 53
+          protocol: UDP
+        - containerPort: 53
+          protocol: TCP
+        volumeMounts:
+        - name: config
+          mountPath: /srv/unbound
+      volumes:
+        - name: config
+          configMap:
+            name: config

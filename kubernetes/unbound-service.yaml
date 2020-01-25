@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unbound-udp
+  labels:
+    app: unbound
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "unbound"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+  selector:
+    app: unbound
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unbound-tcp
+  labels:
+    app: unbound
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "unbound"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+  selector:
+    app: unbound

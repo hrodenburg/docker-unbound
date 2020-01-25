@@ -1,0 +1,12 @@
+# 
+# You can use this configmap to set custom configuration
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  custom.conf: |
+#    server:
+#      log-time-ascii: yes
+#      log-queries: yes
